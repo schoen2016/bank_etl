@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bank-etl"
+version = "0.1.1"
+description = "Modular ETL and analysis utilities for bank statements"
+authors = [ { name = "Author", email = "you@example.com" } ]
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "readme.md"
+requires-python = ">=3.8"
+dependencies = ["pdfplumber"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["bank_etl*"]
+exclude = ["tests*"]
+
+[tool.setuptools.package-data]
+"bank_etl" = ["py.typed"]
+
+[project.urls]
+"Source" = "https://example.org/"
+
+[project.scripts]
+bank-etl = "bank_etl.cli:main"

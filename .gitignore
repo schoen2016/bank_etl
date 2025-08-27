@@ -1,0 +1,76 @@
+# Typical Python ignores
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Byte-compiled / optimized / DLL files
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+*.whl
+
+# Installer logs
+pip-log.txt
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+/.env
+.env
+
+# Pytest
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+
+# PyCharm / IntelliJ
+.idea/
+
+# VS Code
+.vscode/
+
+# Editor directories and files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# SQLite databases and other local data
+*.db
+*.sqlite
+sqlite/*.db
+
+# Build artifacts and local package output
+bank_etl.egg-info/
+*.egg-info/
+
+# Ignore legacy/duplicate package directories (kept temporarily)
+lib/
+
+# Ignore test output and temp files
+.coverage
+.cache/
+
+# OS specific
+desktop.ini
