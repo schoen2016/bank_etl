@@ -65,9 +65,6 @@ sqlite/*.db
 bank_etl.egg-info/
 *.egg-info/
 
-# Ignore legacy/duplicate package directories (kept temporarily)
-lib/
-
 # Ignore test output and temp files
 .coverage
 .cache/
