@@ -4,16 +4,16 @@ This package re-exports commonly used submodules from `bank_etl.lib`
 so callers can import `bank_etl.utils` instead of `bank_etl.lib.utils`.
 """
 
-from . import lib  # keep lib available
+import bank_etl.lib as lib  # keep lib available
 
 # Module re-exports (still available as bank_etl.utils, etc.)
-from .lib import utils as utils  # noqa: E402
-from .lib import etl as etl  # noqa: E402
-from .lib import ingest as ingest  # noqa: E402
-from .lib import analysis as analysis  # noqa: E402
-from .lib import pdf_extract as pdf_extract  # noqa: E402
+from bank_etl.lib import utils as utils  # noqa: E402
+from bank_etl.lib import etl as etl  # noqa: E402
+from bank_etl.lib import ingest as ingest  # noqa: E402
+from bank_etl.lib import analysis as analysis  # noqa: E402
+from bank_etl.lib import pdf_extract as pdf_extract  # noqa: E402
 try:
-	from .lib import categorize as categorize  # noqa: E402
+	from bank_etl.lib import categorize as categorize  # noqa: E402
 except Exception:
 	categorize = None
 
@@ -22,11 +22,14 @@ except Exception:
 # (We avoid wildcard star imports to keep namespace clean of helper modules.)
 
 # utils
-from .lib.utils import stable_hash, safe_float, get_logger, load_config, parse_month, month_iter  # noqa: E402
+# utils
+from bank_etl.lib.utils import stable_hash, safe_float, get_logger, load_config, parse_month, month_iter  # noqa: E402
 # etl
-from .lib.etl import update_sqlite_table, get_group_categories, fetch_group_data, write_csv  # noqa: E402
+# etl
+from bank_etl.lib.etl import update_sqlite_table, get_group_categories, fetch_group_data, write_csv  # noqa: E402
 # ingest
-from .lib.ingest import (
+# ingest
+from bank_etl.lib.ingest import (
 	ingest_pdfs,
 	extract_patterns,
 	list_pdf_files,
@@ -35,9 +38,11 @@ from .lib.ingest import (
 	move_processed_pdfs,
 )  # noqa: E402
 # analysis
-from .lib.analysis import calculate_moving_averages  # noqa: E402
+# analysis
+from bank_etl.lib.analysis import calculate_moving_averages  # noqa: E402
 # pdf_extract
-from .lib.pdf_extract import (
+# pdf_extract
+from bank_etl.lib.pdf_extract import (
 	extract_checking_from_pdf,
 	extract_credit_from_pdf,
 	extract_statement_years,
@@ -47,7 +52,7 @@ from .lib.pdf_extract import (
 # categorize helpers: optional import so `import bank_etl` works even when
 # the installed distribution lacks the categorize module (e.g. older wheel).
 try:
-	from .lib.categorize import (
+	from bank_etl.lib.categorize import (
 		match_substring_with_wildcard,
 		choose_category,
 		categorize_transactions,
