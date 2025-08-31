@@ -30,6 +30,6 @@ def test_categorize_transactions():
         rows = cur.fetchall(); conn.close()
         assert rows[0][1] == 'GROCERIES'
         assert rows[1][1] == 'COFFEE'
-        # Unknown remains None
-        assert rows[2][1] is None
+    # Unknown remains the literal 'uncategorized'
+    assert rows[2][1] == 'uncategorized'
 

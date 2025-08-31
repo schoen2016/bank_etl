@@ -14,7 +14,7 @@ from bank_etl.lib import ingest_pdfs
 from bank_etl.lib import get_group_categories
 from bank_etl.lib import fetch_group_data
 from bank_etl.lib import write_csv
-from bank_etl.lib import calculate_moving_averages
+from bank_etl.lib import calculate_monthly_categories
 from bank_etl.lib import categorize_transactions
 
 
@@ -67,23 +67,26 @@ def run_analysis(
             logger.warning(f"No data returned for group '{group}', skipping")
             continue
 
-        data = calculate_moving_averages(data, categories, logger)
+        # Convert transaction-level rows to monthly summary rows
+        monthly = calculate_monthly_categories(data)
+
+        # Build sensible default headers for monthly summary: month, per-category totals,
+        # per-category 12mo averages, month_total, group_12mo_avg
+        categories_lower = [c.lower() for c in categories]
+        default_headers = ["month"] + categories_lower + [f"{c}_12mo_avg" for c in categories_lower] + ["month_total", "group_12mo_avg"]
 
         _out_headers = None
         if headers:
+            # preserve user header order but ensure defaults are present
             _out_headers = list(headers)
-            for field in [
-                "category_12mo_avg",
-                "group_12mo_avg",
-                "category_12mo_count",
-                "group_12mo_count",
-                "month",
-            ]:
+            for field in default_headers:
                 if field not in _out_headers:
                     _out_headers.append(field)
+        else:
+            _out_headers = default_headers
 
         output_path = os.path.join(output_dir, f"analysis_{group}.csv")
-        write_csv(data, output_path, logger, headers=_out_headers)
+        write_csv(monthly, output_path, logger, headers=_out_headers)
         processed += 1
     return processed
 
